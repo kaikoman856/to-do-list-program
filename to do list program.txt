@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// maximum number of items on the to-do list
+const int MAX_ITEMS = 100;
+
+// array to store the to-do list items
+string todoList[MAX_ITEMS];
+
+// number of items currently on the to-do list
+int numItems = 0;
+
+// function to add an item to the to-do list
+void addItem(string item) {
+    if (numItems == MAX_ITEMS) {
+        cout << "Error: the to-do list is full." << endl;
+        return;
+    }
+    todoList[numItems] = item;
+    numItems++;
+    cout << "Added \"" << item << "\" to the to-do list." << endl;
+}
+
+// function to remove an item from the to-do list
+void removeItem(int index) {
+    if (index < 0 || index >= numItems) {
+        cout << "Error: invalid index." << endl;
+        return;
+    }
+    for (int i = index; i < numItems - 1; i++) {
+        todoList[i] = todoList[i+1];
+    }
+    numItems--;
+    cout << "Removed item at index " << index << "." << endl;
+}
+
+// function to display the to-do list
+void displayList() {
+    if (numItems == 0) {
+        cout << "The to-do list is empty." << endl;
+        return;
+    }
+    cout << "To-do list:" << endl;
+    for (int i = 0; i < numItems; i++) {
+        cout << i << ". " << todoList[i] << endl;
+    }
+}
+
+// main function to run the program
+int main() {
+    int choice = 0;
+    string item;
+    int index;
+
+    while (choice != 4) {
+        cout << "To-do list program:" << endl;
+        cout << "1. Add item" << endl;
+        cout << "2. Remove item" << endl;
+        cout << "3. Display list" << endl;
+        cout << "4. Quit" << endl;
+        cout << "Enter your choice (1-4): ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter the item to add: ";
+                cin >> item;
+                addItem(item);
+                break;
+            case 2:
+                cout << "Enter the index of the item to remove: ";
+                cin >> index;
+                removeItem(index);
+                break;
+            case 3:
+                displayList();
+                break;
+            case 4:
+                cout << "Goodbye!" << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please enter a number from 1 to 4." << endl;
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
