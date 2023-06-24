@@ -1,3 +1,5 @@
+// simple C++ program of a to-do list
+
 #include <iostream>
 #include <string>
 using namespace std;
